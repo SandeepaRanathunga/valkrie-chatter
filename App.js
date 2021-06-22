@@ -5,7 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import colors from './config/colors';
+import Screen from './components/Screen';
 import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 const screenOptoins = {
   headerStyle: { backgroundColor: colors.primary },
@@ -15,15 +17,6 @@ const screenOptoins = {
 
 const Stack = createStackNavigator();
 
-const Home = () => {
-  return (
-    <View style={styles.container}>
-      <Image source={require('./assets/logo.png')} />
-      <StatusBar style='auto' />
-    </View>
-  );
-};
-
 const StackNavigator = () => (
   <Stack.Navigator screenOptions={screenOptoins}>
     <Stack.Screen
@@ -31,6 +24,7 @@ const StackNavigator = () => (
       component={LoginScreen}
       options={{ headerShown: false }}
     />
+    <Stack.Screen name='Register' component={RegisterScreen} />
   </Stack.Navigator>
 );
 

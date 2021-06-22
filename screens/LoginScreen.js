@@ -5,7 +5,7 @@ import { Button, Input } from 'react-native-elements';
 import Screen from '../components/Screen';
 import colors from '../config/colors';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -53,6 +53,7 @@ const LoginScreen = () => {
           title='Join to chat!'
           type='outline'
           containerStyle={styles.buttonContainer}
+          onPress={() => navigation.navigate('Register')}
           titleStyle={styles.buttonTitle}
         />
       </View>
