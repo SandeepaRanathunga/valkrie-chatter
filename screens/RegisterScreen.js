@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import colors from '../config/colors';
 import Screen from '../components/Screen';
+import { auth } from '../firebase';
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');
@@ -12,8 +13,21 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState('');
   const [imgUrl, setImgUrl] = useState('');
 
-  const handleSubmit = () => {
-    console.log('Submit');
+  const handleSubmit = async () => {
+    try {
+      const authUser = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      await authUser.user.updateProfile({
+        displayName: name,
+        photoURL:
+          imgUrl ||
+          'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png',
+      });
+    } catch (error) {
+      alert(error.message);
+    }
   };
   return (
     <Screen style={styles.screen}>
@@ -25,15 +39,19 @@ const RegisterScreen = () => {
           onChangeText={(name) => setName(name)}
           autoFocus
         />
-        <Input placeholder='Email' onChangeText={(email) => setName(email)} />
+        <Input
+          placeholder='Email'
+          onChangeText={(email) => setEmail(email)}
+          type='email'
+        />
         <Input
           placeholder='Password'
-          onChangeText={(password) => setName(password)}
+          onChangeText={(password) => setPassword(password)}
           secureTextEntry
         />
         <Input
           placeholder='Image URL'
-          onChangeText={(imgUrl) => setName(imgUrl)}
+          onChangeText={(imgUrl) => setImgUrl(imgUrl)}
         />
         <Button
           title='Get Connected!'
