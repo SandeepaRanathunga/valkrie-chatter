@@ -8,6 +8,7 @@ import colors from './config/colors';
 import Screen from './components/Screen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import HomeScreen from './screens/HomeScreen';
 
 const screenOptoins = {
   headerStyle: { backgroundColor: colors.primary },
@@ -25,6 +26,7 @@ const StackNavigator = () => (
       options={{ headerShown: false }}
     />
     <Stack.Screen name='Register' component={RegisterScreen} />
+    <Stack.Screen name='Home' component={HomeScreen} />
   </Stack.Navigator>
 );
 

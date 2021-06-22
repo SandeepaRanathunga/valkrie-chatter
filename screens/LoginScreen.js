@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 
 import Screen from '../components/Screen';
 import colors from '../config/colors';
+import { auth } from '../firebase';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const cleanUp = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        navigation.replace('Home');
+      }
+    });
+
+    return cleanUp;
+  }, []);
 
   const handleSignIn = () => {
     console.log(email);
