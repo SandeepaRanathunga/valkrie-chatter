@@ -16,12 +16,12 @@ const HomeScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Valkrie Chatter',
-      //   headerTitleStyle: { alignSelf: 'center' },
-      //   headerLeft: () => (
-      //     <TouchableOpacity>
-      //       <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
-      //     </TouchableOpacity>
-      //   ),
+      headerTitleStyle: { alignSelf: 'center' },
+      headerLeft: () => (
+        <TouchableOpacity onPress={() => navigation.navigate('Account')}>
+          <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
+        </TouchableOpacity>
+      ),
     });
   }, []);
   return (

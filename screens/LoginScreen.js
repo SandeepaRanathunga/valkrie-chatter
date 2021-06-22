@@ -20,9 +20,12 @@ const LoginScreen = ({ navigation }) => {
     return cleanUp;
   }, []);
 
-  const handleSignIn = () => {
-    console.log(email);
-    console.log(password);
+  const handleSignIn = async () => {
+    try {
+      const authUser = await auth.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      alert(error.message);
+    }
   };
   return (
     <Screen style={styles.screen}>
