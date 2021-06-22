@@ -2,9 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 
-const AppListItem = ({ id, chatName, viewChat }) => {
+const AppListItem = ({ id, roomName, viewChat }) => {
+  console.log(id, roomName);
   return (
-    <ListItem>
+    <ListItem key={id}>
       <Avatar
         rounded
         source={{
@@ -12,7 +13,7 @@ const AppListItem = ({ id, chatName, viewChat }) => {
         }}
       />
       <ListItem.Content>
-        <ListItem.Title style={styles.title}>Predeto directors</ListItem.Title>
+        <ListItem.Title style={styles.title}>{roomName}</ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode='tail'>
           Any meetings today or shall we have it tomorrow.Please let me know the
           preferred time.

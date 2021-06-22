@@ -11,6 +11,7 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import HomeScreen from './screens/HomeScreen';
 import AccountScreen from './screens/AccountScreen';
+import AddChatScreen from './screens/AddChatScreen';
 
 const screenOptoins = {
   headerStyle: { backgroundColor: colors.primary },
@@ -39,6 +40,7 @@ const StackNavigator = () => (
     <Stack.Screen name='Register' component={RegisterScreen} />
     <Stack.Screen name='Home' component={HomeScreen} />
     <Stack.Screen name='Account' component={AccountScreen} />
+    <Stack.Screen name='AddChat' component={AddChatScreen} />
   </Stack.Navigator>
 );
 
