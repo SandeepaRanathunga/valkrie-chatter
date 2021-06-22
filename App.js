@@ -4,20 +4,29 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import colors from './config/colors';
+import LoginScreen from './screens/LoginScreen';
+
+const screenOptoins = {
+  headerStyle: { backgroundColor: colors.primary },
+  headerTitleStyle: { color: colors.white },
+  headerTintColor: colors.white,
+};
+
 const Stack = createStackNavigator();
 
 const Home = () => {
   return (
     <View style={styles.container}>
-      <Image source={require('./assets/vclogo.png')} />
+      <Image source={require('./assets/logo.png')} />
       <StatusBar style='auto' />
     </View>
   );
 };
 
 const StackNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen name='Home' component={Home} />
+  <Stack.Navigator screenOptions={screenOptoins}>
+    <Stack.Screen name='Login' component={LoginScreen} />
   </Stack.Navigator>
 );
 
