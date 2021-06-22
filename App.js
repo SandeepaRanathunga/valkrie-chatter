@@ -26,7 +26,11 @@ const Home = () => {
 
 const StackNavigator = () => (
   <Stack.Navigator screenOptions={screenOptoins}>
-    <Stack.Screen name='Login' component={LoginScreen} />
+    <Stack.Screen
+      name='Login'
+      component={LoginScreen}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
 

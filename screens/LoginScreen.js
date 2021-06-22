@@ -3,10 +3,16 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 
 import Screen from '../components/Screen';
+import colors from '../config/colors';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleSignIn = () => {
+    console.log(email);
+    console.log(password);
+  };
   return (
     <Screen style={styles.screen}>
       <Image
@@ -35,9 +41,20 @@ const LoginScreen = () => {
           }}
           type='password'
           secureTextEntry
-          onChangeText={(password) => setEmail(password)}
+          onChangeText={(password) => setPassword(password)}
         />
-        <Button title='Lets go!' />
+        <Button
+          title='Lets chat!'
+          onPress={handleSignIn}
+          buttonStyle={styles.button}
+          containerStyle={styles.buttonContainer}
+        />
+        <Button
+          title='Join to chat!'
+          type='outline'
+          containerStyle={styles.buttonContainer}
+          titleStyle={styles.buttonTitle}
+        />
       </View>
     </Screen>
   );
@@ -53,5 +70,16 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: '90%',
+  },
+  button: {
+    height: 50,
+    backgroundColor: colors.primary,
+  },
+  buttonContainer: {
+    marginTop: 10,
+    borderColor: colors.primary,
+  },
+  buttonTitle: {
+    color: colors.primary,
   },
 });
