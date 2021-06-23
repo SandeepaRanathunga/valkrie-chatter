@@ -12,6 +12,7 @@ function Screen({ children, style }) {
   return (
     <SafeAreaView style={[styles.screen]}>
       <KeyboardAvoidingView style={[styles.view, style]}>
+      {/* behavior={Constants.platform==='android' ? 'height':'padding' */}
         {children}
       </KeyboardAvoidingView>
     </SafeAreaView>

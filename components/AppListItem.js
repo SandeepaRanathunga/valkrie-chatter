@@ -3,9 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 
 const AppListItem = ({ id, roomName, viewChat }) => {
-  console.log(id, roomName);
+
   return (
-    <ListItem key={id}>
+    <ListItem key={id} onPress={()=>viewChat(id,roomName)}>
       <Avatar
         rounded
         source={{

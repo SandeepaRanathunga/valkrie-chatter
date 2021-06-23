@@ -54,6 +54,9 @@ const HomeScreen = ({ navigation }) => {
       ),
     });
   }, []);
+  const viewChat=(id,roomName)=>{
+    navigation.navigate('ViewChat',{id:id,roomName:roomName});
+  }
   return (
     <Screen>
       <ScrollView>
@@ -62,6 +65,7 @@ const HomeScreen = ({ navigation }) => {
             id={chatRoom.id}
             roomName={chatRoom.data.roomName}
             key={chatRoom.id}
+            viewChat={viewChat}
           />
         ))}
       </ScrollView>
