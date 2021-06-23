@@ -9,16 +9,33 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 import Screen from '../components/Screen';
+import Message from '../components/Message';
 import colors from '../config/colors';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const ChatScreen = ({ navigation, route }) => {
   const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]);
   useLayoutEffect(() => {
     navigation.setOptions({
       title: route.params.roomName,
       headerTitleStyle: { alignSelf: 'flex-start' },
     });
-  }, []);
+  }, [navigation]);
+
+  useLayoutEffect(() => {
+    const cleanUp = database
+      .collection('chats')
+      .doc(route.params.id)
+      .collection('messages')
+      .orderBy('timestamp', 'asc')
+      .onSnapshot((snapshot) =>
+        setMessages(
+          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        )
+      );
+    return cleanUp;
+  }, [route]);
   const handleSendMessage = () => {
     console.log(message);
     database
@@ -36,7 +53,32 @@ const ChatScreen = ({ navigation, route }) => {
   };
   return (
     <Screen style={styles.screen}>
-      <ScrollView></ScrollView>
+      <ScrollView>
+        {messages.map(
+          ({ id, data }) =>
+            data.email === auth.currentUser.email ? (
+              <Message
+                id={id}
+                data={data}
+                key={id}
+                align='flex-end'
+                bgColor={colors.light_grey}
+                color={'black'}
+              />
+            ) : (
+              <Message
+                id={id}
+                data={data}
+                key={id}
+                align='flex-start'
+                bgColor={colors.slate_grey}
+                color={colors.white}
+              />
+            )
+
+          //   <Text>{data.message}</Text>
+        )}
+      </ScrollView>
       <View style={styles.inputContainer}>
         <View style={styles.input}>
           <Input
