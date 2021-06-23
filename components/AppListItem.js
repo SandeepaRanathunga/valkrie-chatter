@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
+import { database } from '../firebase';
 
 const AppListItem = ({ id, roomName, viewChat }) => {
+  const [messages, setMessages] = useState([]);
 
+  useEffect(() => {
+    const cleanUp = database
+      .collection('chats')
+      .doc(id)
+      .collection('messages')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) =>
+        setMessages(snapshot.docs.map((doc) => doc.data()))
+      );
+    return cleanUp;
+  }, []);
   return (
-    <ListItem key={id} onPress={()=>viewChat(id,roomName)}>
+    <ListItem key={id} onPress={() => viewChat(id, roomName)}>
       <Avatar
         rounded
         source={{
@@ -15,8 +28,10 @@ const AppListItem = ({ id, roomName, viewChat }) => {
       <ListItem.Content>
         <ListItem.Title style={styles.title}>{roomName}</ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode='tail'>
-          Any meetings today or shall we have it tomorrow.Please let me know the
-          preferred time.
+          {messages[0] &&
+            messages[0].displayName?.split(' ')[0] +
+              ' : ' +
+              messages[0].message}
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>

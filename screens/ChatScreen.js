@@ -8,6 +8,10 @@ import { auth, database } from '../firebase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Setting a timer']);
+
 import Screen from '../components/Screen';
 import Message from '../components/Message';
 import colors from '../config/colors';
@@ -34,10 +38,10 @@ const ChatScreen = ({ navigation, route }) => {
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         )
       );
+    console.log('Messages updated');
     return cleanUp;
-  }, [route]);
+  }, []);
   const handleSendMessage = () => {
-    console.log(message);
     database
       .collection('chats')
       .doc(route.params.id)
@@ -82,7 +86,7 @@ const ChatScreen = ({ navigation, route }) => {
       <View style={styles.inputContainer}>
         <View style={styles.input}>
           <Input
-            placeholder='Mmmm, say something....'
+            placeholder='Say something....'
             onChangeText={(message) => setMessage(message)}
             value={message}
           />

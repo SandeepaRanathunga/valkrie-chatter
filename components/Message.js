@@ -4,7 +4,6 @@ import { Avatar } from 'react-native-elements';
 import { auth, database } from '../firebase';
 
 const Message = ({ id, data, style, align, bgColor, color }) => {
-  console.log('data', data);
   return (
     <View
       style={[styles.container, { alignSelf: align, backgroundColor: bgColor }]}
