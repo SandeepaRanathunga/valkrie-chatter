@@ -8,6 +8,9 @@ import colors from '../config/colors';
 
 const AddChatScreen = ({ navigation }) => {
   const [chatRoom, setChatRoom] = useState('');
+  const [dp, setDp] = useState(
+    'https://www.seekpng.com/png/full/44-443227_facebook-group-facebook-group-icon-png.png'
+  );
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -19,6 +22,7 @@ const AddChatScreen = ({ navigation }) => {
     try {
       const result = await database.collection('chats').add({
         roomName: chatRoom,
+        dp: dp,
       });
       navigation.goBack();
     } catch (error) {
@@ -31,6 +35,10 @@ const AddChatScreen = ({ navigation }) => {
         <Input
           placeholder='Chat Room name'
           onChangeText={(name) => setChatRoom(name)}
+        />
+        <Input
+          placeholder='Link a display picture'
+          onChangeText={(link) => setDp(link)}
         />
         <Button
           title='Start'

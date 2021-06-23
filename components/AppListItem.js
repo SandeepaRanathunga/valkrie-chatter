@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import { database } from '../firebase';
 
-const AppListItem = ({ id, roomName, viewChat }) => {
+const AppListItem = ({ id, roomName, dp, viewChat }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const AppListItem = ({ id, roomName, viewChat }) => {
       <Avatar
         rounded
         source={{
-          uri: 'https://avatars.githubusercontent.com/u/55539896?s=40&u=67c5619ec435077071be3dd916d5f7c4150d39e0&v=4',
+          uri: dp,
         }}
       />
       <ListItem.Content>

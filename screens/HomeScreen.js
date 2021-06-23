@@ -30,15 +30,7 @@ const HomeScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Valkrie Chatter',
-      headerTitleStyle: { alignSelf: 'center' },
-      headerLeft: () => (
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Account')}
-          style={{ marginHorizontal: 10 }}
-        >
-          <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
-        </TouchableOpacity>
-      ),
+      headerTitleStyle: { alignSelf: 'flex-start' },
       headerRight: () => (
         <View style={styles.rightView}>
           <TouchableOpacity
@@ -47,16 +39,19 @@ const HomeScreen = ({ navigation }) => {
           >
             <Entypo name='new-message' size={28} color='black' />
           </TouchableOpacity>
-          <TouchableOpacity style={{ marginHorizontal: 10 }}>
-            <MaterialCommunityIcons name='camera' size={30} color='black' />
+          <TouchableOpacity
+            style={{ marginHorizontal: 10 }}
+            onPress={() => navigation.navigate('Account')}
+          >
+            <MaterialCommunityIcons name='account' size={30} color='black' />
           </TouchableOpacity>
         </View>
       ),
     });
   }, []);
-  const viewChat=(id,roomName)=>{
-    navigation.navigate('ViewChat',{id:id,roomName:roomName});
-  }
+  const viewChat = (id, roomName) => {
+    navigation.navigate('ViewChat', { id: id, roomName: roomName });
+  };
   return (
     <Screen>
       <ScrollView>
@@ -66,6 +61,7 @@ const HomeScreen = ({ navigation }) => {
             roomName={chatRoom.data.roomName}
             key={chatRoom.id}
             viewChat={viewChat}
+            dp={chatRoom.data.dp}
           />
         ))}
       </ScrollView>

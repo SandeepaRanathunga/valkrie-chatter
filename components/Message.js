@@ -21,7 +21,8 @@ export default Message;
 
 const styles = StyleSheet.create({
   container: {
-    minWidth: 200,
+    minWidth: 100,
+    maxWidth: 300,
     minHeight: 50,
     padding: 6,
     margin: 5,
