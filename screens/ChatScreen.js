@@ -39,7 +39,6 @@ const ChatScreen = ({ navigation, route }) => {
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         )
       );
-    console.log('Messages updated');
     return cleanUp;
   }, []);
   const handleSendMessage = () => {
@@ -58,32 +57,6 @@ const ChatScreen = ({ navigation, route }) => {
   };
   return (
     <Screen style={styles.screen}>
-      {/* <ScrollView>
-        {messages.map(
-          ({ id, data }) =>
-            data.email === auth.currentUser.email ? (
-              <Message
-                id={id}
-                data={data}
-                key={id}
-                align='flex-end'
-                bgColor={colors.light_grey}
-                color={'black'}
-              />
-            ) : (
-              <Message
-                id={id}
-                data={data}
-                key={id}
-                align='flex-start'
-                bgColor={colors.slate_grey}
-                color={colors.white}
-              />
-            )
-
-          //   <Text>{data.message}</Text>
-        )}
-      </ScrollView> */}
       <FlatList
         data={messages}
         keyExtractor={(message) => message.id.toString()}
