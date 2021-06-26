@@ -27,12 +27,23 @@ const AppListItem = ({ id, roomName, dp, viewChat }) => {
       />
       <ListItem.Content>
         <ListItem.Title style={styles.title}>{roomName}</ListItem.Title>
-        <ListItem.Subtitle numberOfLines={1} ellipsizeMode='tail'>
-          {messages[0] &&
-            messages[0].displayName?.split(' ')[0] +
-              ' : ' +
-              messages[0].message}
-        </ListItem.Subtitle>
+        <View style={styles.subtitleContainer}>
+          <ListItem.Subtitle
+            numberOfLines={1}
+            ellipsizeMode='tail'
+            style={styles.message}
+          >
+            {messages[0] &&
+              messages[0].displayName?.split(' ')[0] +
+                ' : ' +
+                messages[0].message}
+          </ListItem.Subtitle>
+          <ListItem.Subtitle>
+            {new Date(messages[0].timestamp?.seconds * 1000)
+              .toLocaleTimeString()
+              .slice(0, -3)}
+          </ListItem.Subtitle>
+        </View>
       </ListItem.Content>
     </ListItem>
   );
@@ -44,5 +55,11 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 18,
+  },
+  subtitleContainer: {
+    flexDirection: 'row',
+  },
+  message: {
+    flex: 1,
   },
 });
