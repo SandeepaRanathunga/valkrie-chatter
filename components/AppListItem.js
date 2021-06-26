@@ -38,11 +38,11 @@ const AppListItem = ({ id, roomName, dp, viewChat }) => {
                 ' : ' +
                 messages[0].message}
           </ListItem.Subtitle>
-          <ListItem.Subtitle>
+          {/* <ListItem.Subtitle>
             {new Date(messages[0].timestamp?.seconds * 1000)
               .toLocaleTimeString()
               .slice(0, -3)}
-          </ListItem.Subtitle>
+          </ListItem.Subtitle> */}
         </View>
       </ListItem.Content>
     </ListItem>
