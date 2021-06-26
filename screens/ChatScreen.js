@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useState, useEffect } from 'react';
-import { ScrollView } from 'react-native';
+import React, { useLayoutEffect, useState, useEffect, useRef } from 'react';
+import { ScrollView, FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import { Input } from 'react-native-elements';
@@ -15,11 +15,12 @@ LogBox.ignoreLogs(['Setting a timer']);
 import Screen from '../components/Screen';
 import Message from '../components/Message';
 import colors from '../config/colors';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const ChatScreen = ({ navigation, route }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+
+  const scrollView = useRef();
   useEffect(() => {
     navigation.setOptions({
       title: route.params.roomName,
@@ -57,7 +58,7 @@ const ChatScreen = ({ navigation, route }) => {
   };
   return (
     <Screen style={styles.screen}>
-      <ScrollView>
+      {/* <ScrollView>
         {messages.map(
           ({ id, data }) =>
             data.email === auth.currentUser.email ? (
@@ -82,7 +83,34 @@ const ChatScreen = ({ navigation, route }) => {
 
           //   <Text>{data.message}</Text>
         )}
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList
+        data={messages}
+        keyExtractor={(message) => message.id.toString()}
+        ref={scrollView}
+        onContentSizeChange={() => scrollView.current.scrollToEnd()}
+        renderItem={({ item: { id, data } }) =>
+          data.email === auth.currentUser.email ? (
+            <Message
+              id={id}
+              data={data}
+              key={id}
+              align='flex-end'
+              bgColor={colors.light_grey}
+              color={'black'}
+            />
+          ) : (
+            <Message
+              id={id}
+              data={data}
+              key={id}
+              align='flex-start'
+              bgColor={colors.slate_grey}
+              color={colors.white}
+            />
+          )
+        }
+      />
       <View style={styles.inputContainer}>
         <View style={styles.input}>
           <Input
