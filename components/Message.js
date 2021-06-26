@@ -4,6 +4,9 @@ import { Avatar } from 'react-native-elements';
 import { auth, database } from '../firebase';
 
 const Message = ({ id, data, style, align, bgColor, color }) => {
+  const time = new Date(data.timestamp?.seconds * 1000)
+    .toLocaleTimeString()
+    .slice(0, -3);
   return (
     <View
       style={[styles.container, { alignSelf: align, backgroundColor: bgColor }]}
@@ -13,6 +16,9 @@ const Message = ({ id, data, style, align, bgColor, color }) => {
         <Text style={[styles.user, { color: color }]}>{data.displayName}</Text>
       )}
       <Text style={[styles.message, { color: color }]}>{data.message}</Text>
+      <Text style={[styles.time, { color: color }]}>
+        {time ? time : 'Just now'}
+      </Text>
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
@@ -20,14 +20,14 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 const ChatScreen = ({ navigation, route }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  useLayoutEffect(() => {
+  useEffect(() => {
     navigation.setOptions({
       title: route.params.roomName,
       headerTitleStyle: { alignSelf: 'flex-start' },
     });
   }, [navigation]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const cleanUp = database
       .collection('chats')
       .doc(route.params.id)
@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   input: {
-    width: 350,
+    width: '90%',
+    maxWidth: 350,
   },
 });
